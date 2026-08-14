@@ -1,6 +1,4 @@
-@SistemaChamados_HostAddress = http://localhost:5179
+Delete https://localhost:7099/api/tickets/2
+Content-Type: application/json
 
-GET {{SistemaChamados_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+{}
