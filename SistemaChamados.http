@@ -1,4 +1,7 @@
-Delete https://localhost:7099/api/tickets/2
+Post https://localhost:7099/api/tickets
 Content-Type: application/json
 
-{}
+{
+     "title": "Tarefa adicionada usando o service, DI e repository sem informar o id e lista não existindo",
+     "description": "Tarefa adicionada usando o service, DI e repository"
+}

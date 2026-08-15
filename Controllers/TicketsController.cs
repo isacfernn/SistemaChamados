@@ -8,22 +8,28 @@ namespace SistemaChamados.Controllers
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
+
+        private readonly TicketService _service;
+
+        
+        public TicketsController(TicketService service)
+        {
+            _service = service;
+        }
+
         [HttpGet]
         public IActionResult GetAll()
         {
-            var services = new TicketService();
-
-            var tickets = services.GetAll();
+            var tickets = _service.GetAll();
 
             return Ok(tickets);
         }
 
+
         [HttpGet("{id}")]
         public ActionResult<Ticket> GetById(int id)
         {
-            var service = new TicketService();
-
-            var ticket = service.GetById(id);
+            var ticket = _service.GetById(id);
 
             if (ticket == null)
             {
@@ -37,9 +43,7 @@ namespace SistemaChamados.Controllers
         [HttpPost]
         public IActionResult Create(Ticket ticket)
         {
-            var service = new TicketService();
-
-            var ticketNovo = service.Create(ticket);
+            var ticketNovo = _service.Create(ticket);
            
             return Ok(ticketNovo);
         }
@@ -48,9 +52,7 @@ namespace SistemaChamados.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, Ticket ticket)
         {
-            var service = new TicketService();
-
-            var ticketEditado = service.Update(id, ticket);
+            var ticketEditado = _service.Update(id, ticket);
 
             if (ticketEditado == null)
             {
@@ -60,19 +62,18 @@ namespace SistemaChamados.Controllers
             return Ok(ticketEditado);
         }
 
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id) 
         {
-            var service = new TicketService();
-
-            var ticketEncontrado = service.Delete(id);
+            var ticketEncontrado = _service.Delete(id);
 
             if (ticketEncontrado == null)
             {
                 return NotFound();
             }
 
-            return Ok(new {mensagem = "Tarefa Deletada"});
+            return Ok(new {mensagem = "Ticket Deletado"});
         }
     }
 }

@@ -1,73 +1,54 @@
 ﻿using SistemaChamados.Data;
 using SistemaChamados.Models;
+using SistemaChamados.Repositories;
 
 namespace SistemaChamados.Services
 {
     public class TicketService
     {
-        public List<Ticket> GetAll()
+        private readonly TicketRepository _repository;
+
+        public TicketService(TicketRepository repository)
         {
-            return FakeDatabase.Tickets;
+            _repository = repository;
+        }
+
+        public List<Ticket>? GetAll()
+        {
+            var ticketRepository = _repository.GetAllRepository();
+
+            return ticketRepository;
         }
 
         public Ticket? GetById(int id)
         {
-            var Ticket = FakeDatabase.Tickets.FirstOrDefault(t => 
-                t.Id == id);
+            var ticketRepository = _repository.GetByIdRepository(id);
             
-            return Ticket;
+            return ticketRepository;
         }
+        
 
         public Ticket Create(Ticket ticket)
         {
-            int maiorId = FakeDatabase.Tickets
-                 .Select(m => (int?)m.Id)
-                 .Max() ?? 0;
+            var ticketRepositoy = _repository.CreateRepository(ticket);
 
-            maiorId++;
-
-            var novoTicket = new Ticket
-            {
-                Id = maiorId,
-                Title = ticket.Title,
-                Description = ticket.Description
-            };
-
-            FakeDatabase.Tickets.Add(novoTicket);
-
-            return novoTicket;
+            return ticketRepositoy;
         }
+
 
         public Ticket? Update(int id, Ticket ticket)
         {
-            var ticketEncontrado = FakeDatabase.Tickets
-                .FirstOrDefault(t => t.Id == id);
+            var ticketRepositoy = _repository.UpdateRepository(id, ticket);
 
-            if (ticketEncontrado == null)
-            {
-                return null;
-            }
-
-            ticketEncontrado.Title = ticket.Title;
-            ticketEncontrado.Description = ticket.Description;
-
-            return ticketEncontrado;
+            return ticketRepositoy;
         }
 
-        public Ticket? Delete(int id)
+
+       public Ticket? Delete(int id)
         {
-            var ticketEncontrado = FakeDatabase.Tickets
-                .FirstOrDefault(t => t.Id == id);
+            var ticketRepository = _repository.DeleteRepositoy(id);
 
-            if (ticketEncontrado == null)
-            {
-                return null;
-            }
-
-            FakeDatabase.Tickets.Remove(ticketEncontrado);
-
-            return ticketEncontrado;
-
+            return ticketRepository;
         }
     }
 }
