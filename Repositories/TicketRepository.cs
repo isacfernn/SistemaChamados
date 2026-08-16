@@ -5,42 +5,41 @@ namespace SistemaChamados.Repositories
 {
     public class TicketRepository
     {
-        public List<Ticket>? GetAllRepository()
+        private readonly AppDbContext _context;
+
+        public TicketRepository(AppDbContext context)
         {
-            return FakeDatabase.Tickets;
+            _context = context;
+        }
+
+        public List<Ticket> GetAllRepository()
+        {
+            return _context.Tickets.ToList();
         }
 
         public Ticket? GetByIdRepository(int id)
         {
-            var ticketEncontrado = FakeDatabase.Tickets.FirstOrDefault(t => 
+            var ticketEncontrado = _context.Tickets.FirstOrDefault(t => 
                 t.Id == id);
-
+            
+            if (ticketEncontrado == null) 
+            {
+                return null;
+            }
             return ticketEncontrado;
         }
 
         public Ticket CreateRepository(Ticket ticket) 
-        {
-            int maiorId = FakeDatabase.Tickets
-                 .Select(m => (int?)m.Id)
-                 .Max() ?? 0;
+        {           
+            _context.Tickets.Add(ticket);
+            _context.SaveChanges();
 
-            maiorId++;
-
-            var novoTicket = new Ticket
-            {
-                Id = maiorId,
-                Title = ticket.Title,
-                Description = ticket.Description
-            };
-
-            FakeDatabase.Tickets.Add(novoTicket);
-
-            return novoTicket;
+            return ticket;
         }
 
         public Ticket? UpdateRepository(int id, Ticket ticket)
         {
-            var ticketEncontrado = FakeDatabase.Tickets
+            var ticketEncontrado = _context.Tickets
                 .FirstOrDefault(t => t.Id == id);
 
             if (ticketEncontrado == null)
@@ -51,12 +50,14 @@ namespace SistemaChamados.Repositories
             ticketEncontrado.Title = ticket.Title;
             ticketEncontrado.Description = ticket.Description;
 
+            _context.SaveChanges();
+
             return ticketEncontrado;
         }
 
-        public Ticket? DeleteRepositoy(int id)
+        public Ticket? DeleteRepository(int id)
         {
-            var ticketEncontrado = FakeDatabase.Tickets
+            var ticketEncontrado = _context.Tickets
                 .FirstOrDefault(t => t.Id == id);
 
             if (ticketEncontrado == null)
@@ -64,10 +65,10 @@ namespace SistemaChamados.Repositories
                 return null;
             }
 
-            FakeDatabase.Tickets.Remove(ticketEncontrado);
+            _context.Tickets.Remove(ticketEncontrado);
+            _context.SaveChanges();
 
             return ticketEncontrado;
-
         }
     }
 }

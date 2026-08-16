@@ -1,7 +1,7 @@
-Post https://localhost:7099/api/tickets
+Put https://localhost:7099/api/tickets/1
 Content-Type: application/json
 
 {
-     "title": "Tarefa adicionada usando o service, DI e repository sem informar o id e lista não existindo",
-     "description": "Tarefa adicionada usando o service, DI e repository"
+    "title": "Tarefa adicionada usando o service, DI e repository",
+    "description": "Tarefa adicionada usando o service, DI e repository"
 }

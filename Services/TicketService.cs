@@ -13,42 +13,35 @@ namespace SistemaChamados.Services
             _repository = repository;
         }
 
-        public List<Ticket>? GetAll()
+        public List<Ticket> GetAll()
         {
-            var ticketRepository = _repository.GetAllRepository();
-
-            return ticketRepository;
+            return _repository.GetAllRepository();
         }
 
         public Ticket? GetById(int id)
-        {
-            var ticketRepository = _repository.GetByIdRepository(id);
-            
-            return ticketRepository;
+        {            
+            return _repository.GetByIdRepository(id);
         }
         
 
         public Ticket Create(Ticket ticket)
         {
-            var ticketRepositoy = _repository.CreateRepository(ticket);
 
-            return ticketRepositoy;
+            ticket.CreatedAt = DateTime.UtcNow;
+
+            return _repository.CreateRepository(ticket);
         }
 
 
         public Ticket? Update(int id, Ticket ticket)
         {
-            var ticketRepositoy = _repository.UpdateRepository(id, ticket);
-
-            return ticketRepositoy;
+            return _repository.UpdateRepository(id, ticket);
         }
 
 
        public Ticket? Delete(int id)
         {
-            var ticketRepository = _repository.DeleteRepositoy(id);
-
-            return ticketRepository;
+            return _repository.DeleteRepository(id);
         }
     }
 }
