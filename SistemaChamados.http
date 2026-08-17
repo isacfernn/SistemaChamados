@@ -1,7 +1,7 @@
-Put https://localhost:7099/api/tickets/1
+Post https://localhost:7099/api/tickets
 Content-Type: application/json
 
 {
-    "title": "Tarefa adicionada usando o service, DI e repository",
-    "description": "Tarefa adicionada usando o service, DI e repository"
+     "title": "Tarefa adicionada Async",
+     "description": "Tarefa adicionada usando async"
 }

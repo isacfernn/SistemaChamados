@@ -13,35 +13,35 @@ namespace SistemaChamados.Services
             _repository = repository;
         }
 
-        public List<Ticket> GetAll()
+        public async Task<List<Ticket>> GetAll()
         {
-            return _repository.GetAllRepository();
+           return await _repository.GetAllRepository();
         }
 
-        public Ticket? GetById(int id)
+        public async Task<Ticket?> GetById(int id)
         {            
-            return _repository.GetByIdRepository(id);
+            return await _repository.GetByIdRepository(id);
         }
         
 
-        public Ticket Create(Ticket ticket)
+        public async Task<Ticket> Create(Ticket ticket)
         {
 
             ticket.CreatedAt = DateTime.UtcNow;
 
-            return _repository.CreateRepository(ticket);
+            return await _repository.CreateRepository(ticket);
         }
 
 
-        public Ticket? Update(int id, Ticket ticket)
+        public async Task<Ticket?> Update(int id, Ticket ticket)
         {
-            return _repository.UpdateRepository(id, ticket);
+            return await _repository.UpdateRepository(id, ticket);
         }
 
 
-       public Ticket? Delete(int id)
+       public async Task<Ticket?> Delete(int id)
         {
-            return _repository.DeleteRepository(id);
+            return await _repository.DeleteRepository(id);
         }
     }
 }

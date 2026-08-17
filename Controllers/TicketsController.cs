@@ -8,28 +8,27 @@ namespace SistemaChamados.Controllers
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
-
         private readonly TicketService _service;
 
-        
         public TicketsController(TicketService service)
         {
             _service = service;
         }
 
+
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var tickets = _service.GetAll();
+            var tickets = await _service.GetAll();
 
             return Ok(tickets);
         }
 
 
         [HttpGet("{id}")]
-        public ActionResult<Ticket> GetById(int id)
+        public async Task<ActionResult<Ticket>> GetById(int id)
         {
-            var ticket = _service.GetById(id);
+            var ticket = await _service.GetById(id);
 
             if (ticket == null)
             {
@@ -41,18 +40,18 @@ namespace SistemaChamados.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(Ticket ticket)
+        public async Task<IActionResult> Create(Ticket ticket)
         {
-            var ticketNovo = _service.Create(ticket);
+            var ticketNovo = await _service.Create(ticket);
            
             return Ok(ticketNovo);
         }
 
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Ticket ticket)
+        public async Task<IActionResult> Update(int id, Ticket ticket)
         {
-            var ticketEditado = _service.Update(id, ticket);
+            var ticketEditado = await _service.Update(id, ticket);
 
             if (ticketEditado == null)
             {
@@ -64,9 +63,9 @@ namespace SistemaChamados.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id) 
+        public async Task<IActionResult> Delete(int id) 
         {
-            var ticketEncontrado = _service.Delete(id);
+            var ticketEncontrado = await _service.Delete(id);
 
             if (ticketEncontrado == null)
             {

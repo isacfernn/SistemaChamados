@@ -1,5 +1,7 @@
 ﻿using SistemaChamados.Data;
 using SistemaChamados.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace SistemaChamados.Repositories
 {
@@ -12,35 +14,37 @@ namespace SistemaChamados.Repositories
             _context = context;
         }
 
-        public List<Ticket> GetAllRepository()
+        public async Task<List<Ticket>> GetAllRepository()
         {
-            return _context.Tickets.ToList();
+            return await _context.Tickets.ToListAsync();
         }
 
-        public Ticket? GetByIdRepository(int id)
+        public async Task<Ticket?> GetByIdRepository(int id)
         {
-            var ticketEncontrado = _context.Tickets.FirstOrDefault(t => 
+            var ticketEncontrado = await _context.Tickets.FirstOrDefaultAsync(t => 
                 t.Id == id);
             
             if (ticketEncontrado == null) 
             {
                 return null;
             }
-            return ticketEncontrado;
+
+            return  ticketEncontrado;
         }
 
-        public Ticket CreateRepository(Ticket ticket) 
+        public async Task<Ticket> CreateRepository(Ticket ticket) 
         {           
-            _context.Tickets.Add(ticket);
-            _context.SaveChanges();
+           await _context.Tickets.AddAsync(ticket);
 
-            return ticket;
+           await _context.SaveChangesAsync();
+
+           return ticket;
         }
 
-        public Ticket? UpdateRepository(int id, Ticket ticket)
+        public async Task<Ticket?> UpdateRepository(int id, Ticket ticket)
         {
-            var ticketEncontrado = _context.Tickets
-                .FirstOrDefault(t => t.Id == id);
+            var ticketEncontrado = await _context.Tickets
+                .FirstOrDefaultAsync(t => t.Id == id);
 
             if (ticketEncontrado == null)
             {
@@ -50,15 +54,15 @@ namespace SistemaChamados.Repositories
             ticketEncontrado.Title = ticket.Title;
             ticketEncontrado.Description = ticket.Description;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return ticketEncontrado;
         }
 
-        public Ticket? DeleteRepository(int id)
+        public async Task<Ticket?> DeleteRepository(int id)
         {
-            var ticketEncontrado = _context.Tickets
-                .FirstOrDefault(t => t.Id == id);
+            var ticketEncontrado = await _context.Tickets
+                .FirstOrDefaultAsync(t => t.Id == id);
 
             if (ticketEncontrado == null)
             {
@@ -66,7 +70,8 @@ namespace SistemaChamados.Repositories
             }
 
             _context.Tickets.Remove(ticketEncontrado);
-            _context.SaveChanges();
+
+            await _context.SaveChangesAsync();
 
             return ticketEncontrado;
         }
