@@ -1,4 +1,5 @@
 ﻿using SistemaChamados.Data;
+using SistemaChamados.DTOs;
 using SistemaChamados.Models;
 using SistemaChamados.Repositories;
 
@@ -24,24 +25,34 @@ namespace SistemaChamados.Services
         }
         
 
-        public async Task<Ticket> Create(Ticket ticket)
+        public async Task<Ticket> Create(CreateTicketRequest request)
         {
-
-            ticket.CreatedAt = DateTime.UtcNow;
+            var ticket = new Ticket
+            {
+                Title = request.Title,
+                Description = request.Description,
+                CreatedAt = DateTime.UtcNow
+            };
 
             return await _repository.CreateRepository(ticket);
         }
 
 
-        public async Task<Ticket?> Update(int id, Ticket ticket)
+        public async Task<Ticket?> Update(int id, UpdateTicketRequest request)
         {
+            var ticket = new Ticket
+            {
+                Title = request.Title,
+                Description = request.Description
+            };
+
             return await _repository.UpdateRepository(id, ticket);
         }
 
 
        public async Task<Ticket?> Delete(int id)
-        {
+       {
             return await _repository.DeleteRepository(id);
-        }
+       }
     }
 }

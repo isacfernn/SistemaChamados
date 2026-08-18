@@ -1,7 +1,6 @@
 ﻿using SistemaChamados.Data;
 using SistemaChamados.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace SistemaChamados.Repositories
 {
@@ -23,13 +22,8 @@ namespace SistemaChamados.Repositories
         {
             var ticketEncontrado = await _context.Tickets.FirstOrDefaultAsync(t => 
                 t.Id == id);
-            
-            if (ticketEncontrado == null) 
-            {
-                return null;
-            }
 
-            return  ticketEncontrado;
+            return ticketEncontrado;
         }
 
         public async Task<Ticket> CreateRepository(Ticket ticket) 
