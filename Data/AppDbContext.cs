@@ -13,9 +13,19 @@ namespace SistemaChamados.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Ticket>()
-                .ToTable("Ticket");
-        }
+            modelBuilder.Entity<Ticket>(entity =>
+            {
+                entity.ToTable("Ticket");
 
+                entity.Property(t => t.Status)
+                      .HasConversion<string>()
+                      .HasMaxLength(20);
+
+                
+                entity.Property(t => t.Priority)
+                      .HasConversion<string>()
+                      .HasMaxLength(20);
+            });
+        }
     }
 }

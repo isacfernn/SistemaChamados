@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaChamados.DTOs;
-using SistemaChamados.Models;
 using SistemaChamados.Services;
 
 namespace SistemaChamados.Controllers
@@ -27,7 +26,10 @@ namespace SistemaChamados.Controllers
                 Id = ticket.Id,
                 Title = ticket.Title,
                 Description = ticket.Description,
-                CreatedAt = ticket.CreatedAt
+                CreatedAt = ticket.CreatedAt,
+                UpdatedAt = ticket.UpdatedAt,
+                Status = ticket.Status,
+                Priority = ticket.Priority
             }).ToList();
 
             return Ok(response);
@@ -49,7 +51,10 @@ namespace SistemaChamados.Controllers
                 Id = ticket.Id,
                 Title = ticket.Title,
                 Description = ticket.Description,
-                CreatedAt = ticket.CreatedAt
+                CreatedAt = ticket.CreatedAt,
+                UpdatedAt = ticket.UpdatedAt,
+                Status = ticket.Status,
+                Priority = ticket.Priority
             };
 
             return Ok(response);
@@ -66,9 +71,11 @@ namespace SistemaChamados.Controllers
                 Id = ticketNovo.Id,
                 Title = ticketNovo.Title,
                 Description = ticketNovo.Description,
+                Status = ticketNovo.Status,
+                Priority = ticketNovo.Priority,
                 CreatedAt = ticketNovo.CreatedAt
             };
-           
+
             return Ok(response);
         }
 
@@ -88,7 +95,10 @@ namespace SistemaChamados.Controllers
                 Id = ticketEditado.Id,
                 Title = ticketEditado.Title,
                 Description = ticketEditado.Description,
-                CreatedAt = ticketEditado.CreatedAt
+                CreatedAt = ticketEditado.CreatedAt,
+                UpdatedAt = ticketEditado.UpdatedAt,
+                Status = ticketEditado.Status,
+                Priority = ticketEditado.Priority
             };
 
             return Ok(response);

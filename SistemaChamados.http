@@ -1,7 +1,9 @@
-Put https://localhost:7099/api/tickets/10
+Put https://localhost:7099/api/tickets/12
 Content-Type: application/json
 
 {
-     "title": "Tarefa editada usando DTO",
-     "description": "Tarefa editata usando usando DTO"
+     "title": "Tentativa de alteração",
+     "description": "Testando regra",
+     "status": "Pending",
+     "priority": "High"
 }

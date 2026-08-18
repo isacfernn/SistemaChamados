@@ -47,6 +47,9 @@ namespace SistemaChamados.Repositories
 
             ticketEncontrado.Title = ticket.Title;
             ticketEncontrado.Description = ticket.Description;
+            ticketEncontrado.UpdatedAt = ticket.UpdatedAt;
+            ticketEncontrado.Status = ticket.Status;
+            ticketEncontrado.Priority = ticket.Priority;
 
             await _context.SaveChangesAsync();
 
