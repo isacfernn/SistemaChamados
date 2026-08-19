@@ -15,7 +15,11 @@ namespace SistemaChamados.Repositories
 
         public async Task<List<Ticket>> GetAllRepository()
         {
-            return await _context.Tickets.ToListAsync();
+            return await _context.Tickets
+                .AsNoTracking()
+                .Include(u => u.User)
+                .Include(d => d.Department)
+                .ToListAsync();
         }
 
         public async Task<Ticket?> GetByIdRepository(int id)

@@ -18,13 +18,14 @@ namespace SistemaChamados.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
 
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
 
         public TicketStatus Status { get; set; } = TicketStatus.Pending;
         public TicketPriority Priority { get; set; } = TicketPriority.Low;
-
-        public Ticket()
-        {
-        }
 
         public enum TicketStatus
         {

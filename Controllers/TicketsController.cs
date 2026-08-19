@@ -29,7 +29,19 @@ namespace SistemaChamados.Controllers
                 CreatedAt = ticket.CreatedAt,
                 UpdatedAt = ticket.UpdatedAt,
                 Status = ticket.Status,
-                Priority = ticket.Priority
+                Priority = ticket.Priority,
+
+                User = new UserResponse
+                {
+                    Id = ticket.User.Id,
+                    Name = ticket.User.Name,
+                    Email = ticket.User.Email,
+                },
+
+                Department = new DepartmentResponse
+                {
+                    Sector = ticket.Department.Sector
+                }
             }).ToList();
 
             return Ok(response);
@@ -54,7 +66,19 @@ namespace SistemaChamados.Controllers
                 CreatedAt = ticket.CreatedAt,
                 UpdatedAt = ticket.UpdatedAt,
                 Status = ticket.Status,
-                Priority = ticket.Priority
+                Priority = ticket.Priority,
+
+                User = new UserResponse
+                {
+                    Id = ticket.User.Id,
+                    Name = ticket.User.Name,
+                    Email = ticket.User.Email,
+                },
+
+                Department = new DepartmentResponse
+                {
+                    Sector = ticket.Department.Sector
+                }
             };
 
             return Ok(response);
