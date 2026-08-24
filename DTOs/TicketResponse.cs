@@ -1,6 +1,4 @@
-﻿using SistemaChamados.Models;
-using System.ComponentModel.DataAnnotations;
-using static SistemaChamados.Models.Ticket;
+﻿using static SistemaChamados.Models.Ticket;
 
 namespace SistemaChamados.DTOs
 {
@@ -14,7 +12,7 @@ namespace SistemaChamados.DTOs
         public TicketStatus Status { get; set; }
         public TicketPriority Priority { get; set; }
 
-        public UserResponse User { get; set; }
-        public DepartmentResponse Department { get; set; }
+        public UserResponse? User { get; set; }
+        public DepartmentResponse? Department { get; set; }
     }
 }

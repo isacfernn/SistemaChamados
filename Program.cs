@@ -14,6 +14,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<TicketService>();
 builder.Services.AddScoped<TicketRepository>();
 
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<UserRepository>();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
     sqlOptions =>

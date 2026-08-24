@@ -50,6 +50,25 @@ namespace SistemaChamados.Data
                       .HasForeignKey(u => u.DepartmentId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
+
+            modelBuilder.Entity<Department>(entity =>
+            {
+                entity.ToTable("Departments");
+
+                entity.Property(d => d.Sector)
+                    .HasConversion<string>()
+                    .HasMaxLength(30);
+
+                entity.HasData(
+                    new Department { Id = 1, Sector = Sectors.Ti },
+                    new Department { Id = 2, Sector = Sectors.Vendas },
+                    new Department { Id = 3, Sector = Sectors.Financeiro },
+                    new Department { Id = 4, Sector = Sectors.Rh },
+                    new Department { Id = 5, Sector = Sectors.Producao },
+                    new Department { Id = 6, Sector = Sectors.Gerencia },
+                    new Department { Id = 7, Sector = Sectors.Layout }
+                );
+            });
         }
     }
 }

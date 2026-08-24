@@ -21,26 +21,26 @@ namespace SistemaChamados.Controllers
         {
             var tickets = await _service.GetAll();
 
-            var response = tickets.Select(ticket => new TicketResponse
+            var response = tickets.Select(t => new TicketResponse
             {
-                Id = ticket.Id,
-                Title = ticket.Title,
-                Description = ticket.Description,
-                CreatedAt = ticket.CreatedAt,
-                UpdatedAt = ticket.UpdatedAt,
-                Status = ticket.Status,
-                Priority = ticket.Priority,
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                CreatedAt = t.CreatedAt,
+                UpdatedAt = t.UpdatedAt,
+                Status = t.Status,
+                Priority = t.Priority,
 
                 User = new UserResponse
                 {
-                    Id = ticket.User.Id,
-                    Name = ticket.User.Name,
-                    Email = ticket.User.Email,
+                    Id = t.User.Id,
+                    Name = t.User.Name,
+                    Email = t.User.Email,
                 },
 
                 Department = new DepartmentResponse
                 {
-                    Sector = ticket.Department.Sector
+                    Sector = t.Department.Sector
                 }
             }).ToList();
 
@@ -98,7 +98,7 @@ namespace SistemaChamados.Controllers
                 Status = ticketNovo.Status,
                 Priority = ticketNovo.Priority,
                 CreatedAt = ticketNovo.CreatedAt
-            };
+            }; 
 
             return Ok(response);
         }
@@ -137,6 +137,7 @@ namespace SistemaChamados.Controllers
             if (ticketEncontrado == null)
             {
                 return NotFound();
+
             }
 
             return Ok(new {mensagem = "Ticket Deletado"});

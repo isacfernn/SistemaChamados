@@ -31,7 +31,7 @@ namespace SistemaChamados.Repositories
         }
 
         public async Task<Ticket> CreateRepository(Ticket ticket) 
-        {           
+        {
            await _context.Tickets.AddAsync(ticket);
 
            await _context.SaveChangesAsync();
@@ -75,6 +75,12 @@ namespace SistemaChamados.Repositories
             await _context.SaveChangesAsync();
 
             return ticketEncontrado;
+        }
+
+        public async Task<User?> UserExist(int id)
+        {
+            return await _context.Users
+                .FirstOrDefaultAsync(d => d.Id == id);
         }
     }
 }

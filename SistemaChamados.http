@@ -1,9 +1,10 @@
-Put https://localhost:7099/api/tickets/12
+Post https://localhost:7099/api/tickets
 Content-Type: application/json
 
 {
-     "title": "Tentativa de alteração",
-     "description": "Testando regra",
+     "title": "Tarefa editada adicionando os campos das novas colunas",
+     "description": "Tarefa editada com colunas (status, priority)",
      "status": "Pending",
-     "priority": "High"
+     "priority": "Low",
+     "UserId": 1003
 }

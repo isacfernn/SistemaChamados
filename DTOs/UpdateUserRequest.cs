@@ -1,21 +1,14 @@
-﻿
-
+﻿using SistemaChamados.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace SistemaChamados.Models
+namespace SistemaChamados.DTOs
 {
-    public class User
+    public class UpdateUserRequest
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-
-
-        [Required(ErrorMessage = "Informe o departamento")]
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }
 
-        public List<Ticket> Tickets { get; set; } = new();
     }
 }

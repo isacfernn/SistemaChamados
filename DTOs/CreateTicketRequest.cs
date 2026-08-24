@@ -1,5 +1,4 @@
-﻿using SistemaChamados.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static SistemaChamados.Models.Ticket;
 
 
@@ -19,5 +18,9 @@ namespace SistemaChamados.DTOs
 
         [Required(ErrorMessage = "Informe a prioridade.")]
         public TicketPriority Priority { get; set; } = TicketPriority.Low;
+
+
+        [Required(ErrorMessage = "Informe o Usuário.")]
+        public int UserId { get; set; }
     }
 }

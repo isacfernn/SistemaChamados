@@ -27,17 +27,26 @@ namespace SistemaChamados.Services
 
         public async Task<Ticket> Create(CreateTicketRequest request)
         {
+            var userExist = await _repository.UserExist(request.UserId);
+
+            if (userExist == null)
+            {
+                throw new InvalidOperationException(
+                    "O usuário não existe.");
+            }
+
             var ticket = new Ticket
             {
                 Title = request.Title,
                 Description = request.Description,
                 Status = TicketStatus.Pending,
-                Priority = request.Priority
+                Priority = request.Priority,
+                UserId = userExist.Id,
+                DepartmentId = userExist.DepartmentId,
             };
 
             return await _repository.CreateRepository(ticket);
         }
-
 
         public async Task<Ticket?> Update(int id, UpdateTicketRequest request)
         {
